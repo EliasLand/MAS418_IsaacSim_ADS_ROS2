@@ -1,0 +1,8 @@
+[01m[K/home/admin/Projects/ros2-examples-ads/ads_example_package/src/ads_node.cpp:[m[K In function ‘[01m[Kint main(int, char**)[m[K’:
+[01m[K/home/admin/Projects/ros2-examples-ads/ads_example_package/src/ads_node.cpp:99:46:[m[K [01;31m[Kerror: [m[K‘[01m[Kmiliseconds[m[K’ is not a member of ‘[01m[Kstd::chrono[m[K’; did you mean ‘[01m[Kmilliseconds[m[K’?
+   99 |     std::this_thread::sleep_for(std::chrono::[01;31m[Kmiliseconds[m[K(50));
+      |                                              [01;31m[K^~~~~~~~~~~[m[K
+      |                                              [32m[Kmilliseconds[m[K
+gmake[2]: *** [CMakeFiles/ads_node.dir/build.make:76: CMakeFiles/ads_node.dir/src/ads_node.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/ads_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

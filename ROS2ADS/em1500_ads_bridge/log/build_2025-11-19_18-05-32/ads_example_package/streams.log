@@ -1,0 +1,33 @@
+[0.008s] Invoking command in '/home/admin/Projects/ros2-examples-ads/ads_example_package/build/ads_example_package': /usr/bin/cmake /home/admin/Projects/ros2-examples-ads/ads_example_package -DCMAKE_INSTALL_PREFIX=/home/admin/Projects/ros2-examples-ads/ads_example_package/install/ads_example_package
+[0.085s] -- The C compiler identification is GNU 11.4.0
+[0.159s] -- The CXX compiler identification is GNU 11.4.0
+[0.168s] -- Detecting C compiler ABI info
+[0.219s] -- Detecting C compiler ABI info - done
+[0.227s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.227s] -- Detecting C compile features
+[0.228s] -- Detecting C compile features - done
+[0.231s] -- Detecting CXX compiler ABI info
+[0.288s] -- Detecting CXX compiler ABI info - done
+[0.297s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.297s] -- Detecting CXX compile features
+[0.297s] -- Detecting CXX compile features - done
+[0.303s] [31mCMake Error at CMakeLists.txt:9 (find_package):
+[0.303s]   By not providing "Findament_cmake.cmake" in CMAKE_MODULE_PATH this project
+[0.303s]   has asked CMake to find a package configuration file provided by
+[0.303s]   "ament_cmake", but CMake did not find one.
+[0.303s] 
+[0.304s]   Could not find a package configuration file provided by "ament_cmake" with
+[0.304s]   any of the following names:
+[0.304s] 
+[0.304s]     ament_cmakeConfig.cmake
+[0.304s]     ament_cmake-config.cmake
+[0.304s] 
+[0.304s]   Add the installation prefix of "ament_cmake" to CMAKE_PREFIX_PATH or set
+[0.304s]   "ament_cmake_DIR" to a directory containing one of the above files.  If
+[0.304s]   "ament_cmake" provides a separate development package or SDK, be sure it
+[0.304s]   has been installed.
+[0.304s] 
+[0.304s] [0m
+[0.304s] -- Configuring incomplete, errors occurred!
+[0.304s] See also "/home/admin/Projects/ros2-examples-ads/ads_example_package/build/ads_example_package/CMakeFiles/CMakeOutput.log".
+[0.306s] Invoked command in '/home/admin/Projects/ros2-examples-ads/ads_example_package/build/ads_example_package' returned '1': /usr/bin/cmake /home/admin/Projects/ros2-examples-ads/ads_example_package -DCMAKE_INSTALL_PREFIX=/home/admin/Projects/ros2-examples-ads/ads_example_package/install/ads_example_package

@@ -1,0 +1,126 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3
+					],
+					"jsonFile" : "directory-.-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10.2"
+					},
+					"projectIndex" : 0,
+					"source" : "."
+				},
+				{
+					"build" : "AdsLib",
+					"jsonFile" : "directory-AdsLib-17f76fa984e69d186126.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10.2"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "AdsLib",
+					"targetIndexes" : 
+					[
+						1
+					]
+				},
+				{
+					"build" : "AdsLibTest",
+					"jsonFile" : "directory-AdsLibTest-49c8870a992e84e8a9bd.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10.2"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "AdsLibTest",
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"build" : "example",
+					"jsonFile" : "directory-example-b6fca4a6d0a37c6ae6b9.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10.2"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "example",
+					"targetIndexes" : 
+					[
+						2
+					]
+				}
+			],
+			"name" : "",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					],
+					"name" : "ads",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 2,
+					"id" : "AdsLibTest.bin::@105471fdf3d6128f1c75",
+					"jsonFile" : "target-AdsLibTest.bin-e8330c9180bf5fa2ae71.json",
+					"name" : "AdsLibTest.bin",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "ads::@5b764a451f49a98c36aa",
+					"jsonFile" : "target-ads-5dc49d619ec6beff4e45.json",
+					"name" : "ads",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "example.bin::@70983d692f648185febe",
+					"jsonFile" : "target-example.bin-198d54edb57851b7682c.json",
+					"name" : "example.bin",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/admin/Documents/GitHub/PRA400-UiA-Moition-Lab-Digital-Twin/ROS2ADS/build/ads",
+		"source" : "/home/admin/Documents/GitHub/PRA400-UiA-Moition-Lab-Digital-Twin/ROS2ADS/ADS"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

@@ -1,0 +1,200 @@
+stages:
+  - build
+  - test
+  - release-push
+
+cache:
+  paths:
+  - apt-cache/
+
+codestyle:
+  stage: build
+  tags:
+    - docker
+  image: ${DOCKER_PROXY}debian:bookworm-slim
+  before_script:
+    - apt update -y && apt install -y uncrustify
+    - uncrustify -v
+  script:
+    - ./tools/run-uncrustify.sh check
+  rules:
+    - if: $BHF_CI_SKIP_CODESTYLE == "y"
+      when: never
+    - if: $CI_MERGE_REQUEST_ID
+      when: never
+    - when: on_success
+
+.build-meson:
+  stage: build
+  script:
+    - meson setup build ${BHF_CI_MESON_OPTIONS}
+    - ninja -C build
+    - meson setup example/build example ${BHF_CI_MESON_OPTIONS}
+    - ninja -C example/build
+  artifacts:
+    when: always
+    paths:
+    - AdsLib/**/*.h
+    - build/
+    - example/build/
+
+.build-meson-docker:
+  extends: .build-meson
+  tags:
+    - docker
+  image: ${REGISTRY_HOST}/beckhoff/docker-mxe:40549
+
+build-arch:
+  extends: .build-meson-docker
+  image: ${DOCKER_PROXY}archlinux:base-devel
+  before_script:
+    - pacman --noconfirm --refresh --sync --sysupgrade meson
+
+build-alpine:
+  extends: .build-meson-docker
+  image: ${DOCKER_PROXY}alpine:3.16.2
+  before_script:
+    - apk add g++ meson
+
+build-linux-clang:
+  extends: .build-meson-docker
+  variables:
+    CXX: clang++
+
+build-fbsd-clang:
+  extends: .build-meson
+  tags:
+    - tcbsd_poudriere
+  before_script:
+    - doas pkg install -y meson
+    # we dont limit grep --max-count=1, because curl would complain if grep closes the pipe
+    - curl https://tcbsd.beckhoff.com/TCBSD/13/stable/packages/All/ | grep --only-matching -e "href='.*ADS-Comm-Lib.*'" | cut -d "'" -f 2 | xargs -I{} fetch https://tcbsd.beckhoff.com/TCBSD/13/stable/packages/All/{}
+    - doas pkg install -y -f TF6000-ADS-Comm-Lib-*
+  variables:
+    BHF_CI_MESON_OPTIONS: '-Dtcadsdll_include=/usr/local/include -Dtcadsdll_lib=/usr/local/lib'
+
+build-linux-gcc:
+  extends: .build-meson-docker
+
+build-linux-gcc-i386:
+  extends: .build-meson-docker
+  variables:
+    BHF_CI_MESON_OPTIONS: '--cross-file meson.cross.amd64-linux.i386'
+
+build-linux-gcc-mips:
+  extends: .build-meson-docker
+  variables:
+    BHF_CI_MESON_OPTIONS: '--cross-file meson.cross.amd64-linux.mips'
+  before_script:
+    - apt update -y && apt install -y g++-mips-linux-gnu
+
+build-mxe:
+  extends: .build-meson-docker
+  variables:
+    BHF_CI_MESON_OPTIONS: '--cross-file meson.cross.amd64-linux.win32 -Dcpp_std=c++14 -Db_pie=false'
+
+build-win10:
+  stage: build
+  tags:
+    - MD_TWINCAT_XAE
+  script:
+    - C:\ProgramData\chocolatey\bin\choco install --no-progress -y meson ninja
+    - $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+    - $prog_x86 = [System.Environment]::GetFolderPath('ProgramFilesX86'); $vswhere = "${prog_x86}\Microsoft Visual Studio\Installer\vswhere.exe"; $vsInstallPath = & $vswhere -latest -products * -requires Microsoft.Component.MSBuild -property installationPath; Import-Module "$vsInstallPath\Common7\Tools\Microsoft.VisualStudio.DevShell.dll"; Enter-VsDevShell -VsInstallPath:$vsInstallPath -SkipAutomaticLocation -DevCmdArguments:'-arch=x64 -host_arch=x64'
+    - meson setup build -Dwerror=false -Dcpp_args="-D_CRT_NONSTDC_NO_WARNINGS=1, -D_CRT_SECURE_NO_WARNINGS=1, -DNOMINMAX=1" -Dtcadsdll_include=c:\TwinCAT\AdsApi\TcAdsDll\Include -Dtcadsdll_lib=c:\TwinCAT\AdsApi\TcAdsDll\x64\lib
+    - ninja -C build
+    - meson setup example/build example -Dwerror=false -Dcpp_args="-D_CRT_NONSTDC_NO_WARNINGS=1, -D_CRT_SECURE_NO_WARNINGS=1, -DNOMINMAX=1" -Dtcadsdll_include=c:\TwinCAT\AdsApi\TcAdsDll\Include -Dtcadsdll_lib=c:\TwinCAT\AdsApi\TcAdsDll\x64\lib
+    - ninja -C example/build
+  artifacts:
+    when: always
+    paths:
+    - AdsLib/**/*.h
+    - build/
+    - example/build/
+
+
+.test-with-service-container:
+  stage: test
+  image: ${REGISTRY_HOST}/beckhoff/test_stage/test_runner:v4.40
+  tags:
+    - docker_vm_runner
+    - few_vcpus
+  services:
+    - name: ${REGISTRY_HOST}/beckhoff/build-linuxum:patrickbr-docker-adslib
+      alias: ads-server
+
+.test-linux:
+  extends: .test-with-service-container
+  script:
+    - apt update -y && apt install -y socat xxd
+    - ./tools/90_run_tests.sh
+
+test-linux-clang:
+  extends: .test-linux
+  needs: [
+    "build-linux-clang",
+  ]
+
+test-linux-gcc:
+  extends: .test-linux
+  needs: [
+    "build-linux-gcc",
+  ]
+
+test-linux-gcc-i386:
+  extends: .test-linux
+  needs: [
+    "build-linux-gcc-i386",
+  ]
+  before_script:
+    - dpkg --add-architecture i386
+    - apt update -y && apt install -y libc6:i386 libstdc++6:i386
+
+test-linux-gcc-mips:
+  extends: .test-linux
+  needs: [
+    "build-linux-gcc-mips",
+  ]
+  variables:
+    QEMU_LD_PREFIX: '/usr/mips-linux-gnu'
+    QEMU_USER_EMULATION: 'qemu-mips'
+  before_script:
+    - apt update -y && apt install -y binfmt-support libstdc++-dev-mips-cross qemu-user-binfmt
+
+test-fbsd-clang:
+  extends: .test-with-service-container
+  needs: [
+    "build-fbsd-clang",
+  ]
+  script:
+    - tools/prepare_test_stage.sh
+    - rackctl-emulate add test-device 200
+    - test_stage/test_stage.sh --config-dir=.test-stage testrack QEMU "$(rackctl-config get test-device ip)" ./*.iso & wait $!
+
+build-debian:
+  image: ${REGISTRY_HOST}/beckhoff/bdpg:master
+  stage: build
+  before_script:
+    - apt-get update && apt-get install -y --no-install-recommends meson
+  script:
+    - bdpg build
+  artifacts:
+    expire_in: 1 week
+    when: always
+    paths:
+      - ./debian-release
+
+release-push:
+  image: ${REGISTRY_HOST}/beckhoff/bdpg:master
+  stage: release-push
+  dependencies:
+    - build-debian
+  only:
+    refs:
+      - master
+  script:
+    - mkdir -p "/root/.ssh"
+    - printf '%s\n' "Host *" > /root/.ssh/config
+    - printf '\t%s\n' "StrictHostKeyChecking no" "UserKnownHostsFile /dev/null" >> /root/.ssh/config
+    - .ci/publish_debian_package.sh
+  allow_failure: true

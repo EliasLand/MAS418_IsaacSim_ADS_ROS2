@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.8">
+  <DUT Name="E_RemoteMode" Id="{09ea77a8-facf-4afc-9d70-faaa225997de}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+{attribute 'to_string'}
+TYPE E_RemoteMode :
+(
+	RemoteUDP,
+	RemoteEtherCAT
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.12">
+  <DUT Name="ST_Pose" Id="{c3bc514e-fc6b-4994-83be-85d17d2cb88e}">
+    <Declaration><![CDATA[TYPE ST_Pose :
+STRUCT
+	surge : LREAL;
+	sway : LREAL;
+	heave : LREAL;
+	roll : LREAL;
+	pitch : LREAL;
+	yaw : LREAL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

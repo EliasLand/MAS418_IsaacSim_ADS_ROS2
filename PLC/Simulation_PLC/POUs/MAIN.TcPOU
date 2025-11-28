@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4026.12">
+  <POU Name="MAIN" Id="{1f3c96f2-fcb8-4b7c-9535-3a09aa839ce6}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	// EtherCAT bridge
+	rxEtherCatBridge AT %I* : ST_Feedback;
+	txEtherCatBridge AT %Q* : ST_Control;
+	nRxCounter AT %I* : DINT;
+	nTxCounter AT %Q* : DINT;
+	nRxCounterOld : DINT;
+	
+	fTime		: LREAL;
+	fDt 		: LREAL := 0.01;
+	bEnable		: BOOL := TRUE;
+	timer : TON;
+	bTimout		 : BOOL;
+	
+	stEM1500Pose : ST_Pose;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[fTime := fTime + fDt;
+nTxCounter := nTxCounter + 1;
+
+// ****** Check for timeout ***********
+timer.PT := T#500MS;
+IF nRxCounter <> nRxCounterOld THEN
+    nRxCounterOld := nRxCounter;
+
+    timer(IN := FALSE);
+ELSE
+    timer(IN := TRUE);
+END_IF
+bTimout := timer.Q;
+
+stEm1500Pose.surge := rxEtherCatBridge.em1500.eta[0];
+stEm1500Pose.sway := rxEtherCatBridge.em1500.eta[1];
+stEm1500Pose.heave := rxEtherCatBridge.em1500.eta[2];
+stEm1500Pose.roll := rxEtherCatBridge.em1500.eta[3];
+stEm1500Pose.pitch := rxEtherCatBridge.em1500.eta[4];
+stEm1500Pose.yaw := rxEtherCatBridge.em1500.eta[5];
+
+// --- (optional) legacy sinus test kept for reference ---
+// IF bEnable THEN
+//     txEtherCatBridge.em1500.u[2] := 0.2*SIN(2.0*3.14*0.1 * fTime);
+//     txEtherCatBridge.em8000.u[2] := 0.2*SIN(2.0*3.14*0.1 * fTime);
+// ELSE
+//     txEtherCatBridge.em1500.u[2] := 0.0;
+//     txEtherCatBridge.em8000.u[2] := 0.0;
+// END_IF
+]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="226" Count="5" />
+      <LineId Id="233" Count="0" />
+      <LineId Id="235" Count="2" />
+      <LineId Id="239" Count="2" />
+      <LineId Id="313" Count="0" />
+      <LineId Id="297" Count="0" />
+      <LineId Id="314" Count="4" />
+      <LineId Id="298" Count="8" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

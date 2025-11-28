@@ -1,0 +1,21 @@
+[35m[1mConsolidate compiler generated dependencies of target ads_node[0m
+[ 50%] [32mBuilding CXX object CMakeFiles/ads_node.dir/src/ads_node.cpp.o[0m
+[100%] [32m[1mLinking CXX executable ads_node[0m
+[100%] Built target ads_node
+-- Install configuration: ""
+-- Installing: /home/admin/Projects/ros2-examples-ads/ads_example_package/install/ads_example_package/lib/ads_example_package/ads_node
+-- Installing: /home/admin/Projects/ros2-examples-ads/ads_example_package/install/ads_example_package/share/ament_index/resource_index/package_run_dependencies/ads_example_package
+-- Installing: /home/admin/Projects/ros2-examples-ads/ads_example_package/install/ads_example_package/share/ament_index/resource_index/parent_prefix_path/ads_example_package
+-- Installing: /home/admin/Projects/ros2-examples-ads/ads_example_package/install/ads_example_package/share/ads_example_package/environment/ament_prefix_path.sh
+-- Installing: /home/admin/Projects/ros2-examples-ads/ads_example_package/install/ads_example_package/share/ads_example_package/environment/ament_prefix_path.dsv
+-- Installing: /home/admin/Projects/ros2-examples-ads/ads_example_package/install/ads_example_package/share/ads_example_package/environment/path.sh
+-- Installing: /home/admin/Projects/ros2-examples-ads/ads_example_package/install/ads_example_package/share/ads_example_package/environment/path.dsv
+-- Installing: /home/admin/Projects/ros2-examples-ads/ads_example_package/install/ads_example_package/share/ads_example_package/local_setup.bash
+-- Installing: /home/admin/Projects/ros2-examples-ads/ads_example_package/install/ads_example_package/share/ads_example_package/local_setup.sh
+-- Installing: /home/admin/Projects/ros2-examples-ads/ads_example_package/install/ads_example_package/share/ads_example_package/local_setup.zsh
+-- Installing: /home/admin/Projects/ros2-examples-ads/ads_example_package/install/ads_example_package/share/ads_example_package/local_setup.dsv
+-- Installing: /home/admin/Projects/ros2-examples-ads/ads_example_package/install/ads_example_package/share/ads_example_package/package.dsv
+-- Installing: /home/admin/Projects/ros2-examples-ads/ads_example_package/install/ads_example_package/share/ament_index/resource_index/packages/ads_example_package
+-- Installing: /home/admin/Projects/ros2-examples-ads/ads_example_package/install/ads_example_package/share/ads_example_package/cmake/ads_example_packageConfig.cmake
+-- Installing: /home/admin/Projects/ros2-examples-ads/ads_example_package/install/ads_example_package/share/ads_example_package/cmake/ads_example_packageConfig-version.cmake
+-- Installing: /home/admin/Projects/ros2-examples-ads/ads_example_package/install/ads_example_package/share/ads_example_package/package.xml

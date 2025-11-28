@@ -1,0 +1,4 @@
+source;share/em1500_ads_bridge/local_setup.bash
+source;share/em1500_ads_bridge/local_setup.dsv
+source;share/em1500_ads_bridge/local_setup.sh
+source;share/em1500_ads_bridge/local_setup.zsh

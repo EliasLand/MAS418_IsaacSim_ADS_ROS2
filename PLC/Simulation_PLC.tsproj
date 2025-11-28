@@ -1,0 +1,406 @@
+<?xml version="1.0"?>
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4026.18">
+	<DataTypes>
+		<DataType>
+			<Name GUID="{FC12C28A-748B-0DA7-1317-12DC1F91CE99}" AutoDeleteType="true">ST_FeedbackStewart</Name>
+			<BitSize>1152</BitSize>
+			<SubItem>
+				<Name>eta</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<ArrayInfo>
+					<LBound>0</LBound>
+					<Elements>6</Elements>
+				</ArrayInfo>
+				<BitSize>384</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>eta_t</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<ArrayInfo>
+					<LBound>0</LBound>
+					<Elements>6</Elements>
+				</ArrayInfo>
+				<BitSize>384</BitSize>
+				<BitOffs>384</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>eta_tt</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<ArrayInfo>
+					<LBound>0</LBound>
+					<Elements>6</Elements>
+				</ArrayInfo>
+				<BitSize>384</BitSize>
+				<BitOffs>768</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{180563AC-64CF-1B9F-87BA-2B9E5189220F}" AutoDeleteType="true">ST_FeedbackMru</Name>
+			<BitSize>768</BitSize>
+			<SubItem>
+				<Name>eta</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<ArrayInfo>
+					<LBound>0</LBound>
+					<Elements>6</Elements>
+				</ArrayInfo>
+				<BitSize>384</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>v</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<ArrayInfo>
+					<LBound>0</LBound>
+					<Elements>6</Elements>
+				</ArrayInfo>
+				<BitSize>384</BitSize>
+				<BitOffs>384</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{179BC2F4-1B3A-FB57-34F4-B759AF46C5F5}" AutoDeleteType="true">ST_FeedbackComau</Name>
+			<BitSize>768</BitSize>
+			<SubItem>
+				<Name>q</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<ArrayInfo>
+					<LBound>0</LBound>
+					<Elements>6</Elements>
+				</ArrayInfo>
+				<BitSize>384</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>q_t</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<ArrayInfo>
+					<LBound>0</LBound>
+					<Elements>6</Elements>
+				</ArrayInfo>
+				<BitSize>384</BitSize>
+				<BitOffs>384</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{0E956D4A-E556-55E3-AE46-3A442311B8F4}" AutoDeleteType="true">ST_FeedbackWinch</Name>
+			<BitSize>128</BitSize>
+			<SubItem>
+				<Name>length</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>length_t</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>64</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{700EE887-3F3A-09F5-DB52-634547467A1D}" AutoDeleteType="true">ST_FeedbackQualisys</Name>
+			<BitSize>256</BitSize>
+			<SubItem>
+				<Name>dist</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>pos</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<ArrayInfo>
+					<LBound>0</LBound>
+					<Elements>3</Elements>
+				</ArrayInfo>
+				<BitSize>192</BitSize>
+				<BitOffs>64</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{9BFE7D20-4F7B-5C5D-102E-EEDDBC1C782D}" AutoDeleteType="true">ST_FeedbackLeica</Name>
+			<BitSize>768</BitSize>
+			<SubItem>
+				<Name>pos</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<ArrayInfo>
+					<LBound>0</LBound>
+					<Elements>3</Elements>
+				</ArrayInfo>
+				<BitSize>192</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>R11</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>192</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>R12</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>256</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>R13</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>320</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>R21</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>384</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>R22</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>448</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>R23</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>512</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>R31</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>576</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>R32</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>640</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>R33</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>704</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{2AD68B6A-B725-1B5A-5A09-CEF9A0EAB8AC}" AutoDeleteType="true">ST_Feedback</Name>
+			<BitSize>5760</BitSize>
+			<SubItem>
+				<Name>em8000</Name>
+				<Type GUID="{FC12C28A-748B-0DA7-1317-12DC1F91CE99}">ST_FeedbackStewart</Type>
+				<BitSize>1152</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>em1500</Name>
+				<Type GUID="{FC12C28A-748B-0DA7-1317-12DC1F91CE99}">ST_FeedbackStewart</Type>
+				<BitSize>1152</BitSize>
+				<BitOffs>1152</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>mru1</Name>
+				<Type GUID="{180563AC-64CF-1B9F-87BA-2B9E5189220F}">ST_FeedbackMru</Type>
+				<BitSize>768</BitSize>
+				<BitOffs>2304</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>mru2</Name>
+				<Type GUID="{180563AC-64CF-1B9F-87BA-2B9E5189220F}">ST_FeedbackMru</Type>
+				<BitSize>768</BitSize>
+				<BitOffs>3072</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>comau</Name>
+				<Type GUID="{179BC2F4-1B3A-FB57-34F4-B759AF46C5F5}">ST_FeedbackComau</Type>
+				<BitSize>768</BitSize>
+				<BitOffs>3840</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>winch</Name>
+				<Type GUID="{0E956D4A-E556-55E3-AE46-3A442311B8F4}">ST_FeedbackWinch</Type>
+				<BitSize>128</BitSize>
+				<BitOffs>4608</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>qtm</Name>
+				<Type GUID="{700EE887-3F3A-09F5-DB52-634547467A1D}">ST_FeedbackQualisys</Type>
+				<BitSize>256</BitSize>
+				<BitOffs>4736</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>at960</Name>
+				<Type GUID="{9BFE7D20-4F7B-5C5D-102E-EEDDBC1C782D}">ST_FeedbackLeica</Type>
+				<BitSize>768</BitSize>
+				<BitOffs>4992</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{3B38B9DC-6B04-3DB3-D551-44DD6A24FDE4}" AutoDeleteType="true">ST_ControlStewart</Name>
+			<BitSize>768</BitSize>
+			<SubItem>
+				<Name>u</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<ArrayInfo>
+					<LBound>0</LBound>
+					<Elements>6</Elements>
+				</ArrayInfo>
+				<Comment><![CDATA[ Velocity setpint to stewart]]></Comment>
+				<BitSize>384</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>u_t</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<ArrayInfo>
+					<LBound>0</LBound>
+					<Elements>6</Elements>
+				</ArrayInfo>
+				<BitSize>384</BitSize>
+				<BitOffs>384</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{EF260167-5DA5-36B7-3AEB-C8E054800FCD}" AutoDeleteType="true">ST_ControlComau</Name>
+			<BitSize>384</BitSize>
+			<SubItem>
+				<Name>u</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<ArrayInfo>
+					<LBound>0</LBound>
+					<Elements>6</Elements>
+				</ArrayInfo>
+				<BitSize>384</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{4AA633E8-E9CB-6A02-27B8-88DDD6D544EA}" AutoDeleteType="true">ST_ControlWinch</Name>
+			<BitSize>192</BitSize>
+			<SubItem>
+				<Name>length</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>length_t</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>64</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>length_tt</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+				<BitSize>64</BitSize>
+				<BitOffs>128</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{A6221B99-7697-366C-E3F7-4244EDA2C082}" AutoDeleteType="true">ST_Control</Name>
+			<BitSize>2112</BitSize>
+			<SubItem>
+				<Name>em8000</Name>
+				<Type GUID="{3B38B9DC-6B04-3DB3-D551-44DD6A24FDE4}">ST_ControlStewart</Type>
+				<BitSize>768</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>em1500</Name>
+				<Type GUID="{3B38B9DC-6B04-3DB3-D551-44DD6A24FDE4}">ST_ControlStewart</Type>
+				<BitSize>768</BitSize>
+				<BitOffs>768</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>comau</Name>
+				<Type GUID="{EF260167-5DA5-36B7-3AEB-C8E054800FCD}">ST_ControlComau</Type>
+				<BitSize>384</BitSize>
+				<BitOffs>1536</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>winch</Name>
+				<Type GUID="{4AA633E8-E9CB-6A02-27B8-88DDD6D544EA}">ST_ControlWinch</Type>
+				<BitSize>192</BitSize>
+				<BitOffs>1920</BitOffs>
+			</SubItem>
+		</DataType>
+	</DataTypes>
+	<Project ProjectGUID="{26E11203-DCB4-41BF-B4F7-B618757C76BC}" TargetNetId="169.254.119.135.1.1" Target64Bit="true" ShowHideConfigurations="#x6">
+		<System>
+			<Licenses>
+				<Target>
+					<ManualSelect>{3EBB9639-5FF3-42B6-8847-35C70DC013C8}</ManualSelect>
+				</Target>
+			</Licenses>
+			<Tasks>
+				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
+					<Name>PlcTask</Name>
+				</Task>
+			</Tasks>
+		</System>
+		<Plc>
+			<Project GUID="{8D7DD794-B41F-4BC5-8F39-9FAC02BACBFA}" Name="Simulation_PLC" PrjFilePath="Simulation_PLC\Simulation_PLC.plcproj" TmcFilePath="Simulation_PLC\Simulation_PLC.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcHash="{1878C4D0-8272-11C8-D198-05EA25D7E080}" TmcPath="Simulation_PLC\Simulation_PLC.tmc">
+					<Name>Simulation_PLC Instance</Name>
+					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+					<Vars VarGrpType="2" AreaNo="1">
+						<Name>PlcTask Outputs</Name>
+						<Var>
+							<Name>MAIN.txEtherCatBridge</Name>
+							<Type GUID="{A6221B99-7697-366C-E3F7-4244EDA2C082}">ST_Control</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.nTxCounter</Name>
+							<Type>DINT</Type>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="1">
+						<Name>PlcTask Inputs</Name>
+						<Var>
+							<Name>MAIN.nRxCounter</Name>
+							<Type>DINT</Type>
+						</Var>
+						<Var>
+							<Name>MAIN.rxEtherCatBridge</Name>
+							<Comment><![CDATA[ EtherCAT bridge]]></Comment>
+							<Type GUID="{2AD68B6A-B725-1B5A-5A09-CEF9A0EAB8AC}">ST_Feedback</Type>
+						</Var>
+					</Vars>
+					<Contexts>
+						<Context>
+							<Id>0</Id>
+							<Name>PlcTask</Name>
+							<ManualConfig>
+								<OTCID>#x02010030</OTCID>
+							</ManualConfig>
+							<Priority>20</Priority>
+							<CycleTime>10000000</CycleTime>
+						</Context>
+					</Contexts>
+					<TaskPouOids>
+						<TaskPouOid Prio="20" OTCID="#x08502001"/>
+					</TaskPouOids>
+				</Instance>
+			</Project>
+		</Plc>
+		<Io>
+			<Device File="Device 1 (EtherCAT).xti" Id="1"/>
+			<Device File="QTM (RT-Ethernet Adapter).xti" Id="2"/>
+		</Io>
+	</Project>
+	<Mappings>
+		<MappingInfo Identifier="{00000000-2001-0850-0020-500810000403}" Id="#x02030010"/>
+		<OwnerA Name="TIPC^Simulation_PLC^Simulation_PLC Instance">
+			<OwnerB Name="TIID^Device 1 (EtherCAT)^Box 1 (EL6695-0002)">
+				<Link VarA="PlcTask Inputs^MAIN.nRxCounter" VarB="IO Inputs^Var 162"/>
+				<Link VarA="PlcTask Inputs^MAIN.rxEtherCatBridge" VarB="IO Inputs^Var 163"/>
+				<Link VarA="PlcTask Outputs^MAIN.nTxCounter" VarB="IO Outputs^Var 164"/>
+				<Link VarA="PlcTask Outputs^MAIN.txEtherCatBridge" VarB="IO Outputs^Var 165"/>
+			</OwnerB>
+		</OwnerA>
+	</Mappings>
+</TcSmProject>

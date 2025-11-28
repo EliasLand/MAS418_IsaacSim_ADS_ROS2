@@ -1,0 +1,14 @@
+/home/admin/Projects/ros2-examples-ads/ads_example_package/install/ads_example_package/lib/ads_example_package/ads_node
+/home/admin/Projects/ros2-examples-ads/ads_example_package/install/ads_example_package/share/ament_index/resource_index/package_run_dependencies/ads_example_package
+/home/admin/Projects/ros2-examples-ads/ads_example_package/install/ads_example_package/share/ament_index/resource_index/parent_prefix_path/ads_example_package
+/home/admin/Projects/ros2-examples-ads/ads_example_package/install/ads_example_package/share/ads_example_package/environment/ament_prefix_path.dsv
+/home/admin/Projects/ros2-examples-ads/ads_example_package/install/ads_example_package/share/ads_example_package/environment/path.dsv
+/home/admin/Projects/ros2-examples-ads/ads_example_package/install/ads_example_package/share/ads_example_package/local_setup.bash
+/home/admin/Projects/ros2-examples-ads/ads_example_package/install/ads_example_package/share/ads_example_package/local_setup.sh
+/home/admin/Projects/ros2-examples-ads/ads_example_package/install/ads_example_package/share/ads_example_package/local_setup.zsh
+/home/admin/Projects/ros2-examples-ads/ads_example_package/install/ads_example_package/share/ads_example_package/local_setup.dsv
+/home/admin/Projects/ros2-examples-ads/ads_example_package/install/ads_example_package/share/ads_example_package/package.dsv
+/home/admin/Projects/ros2-examples-ads/ads_example_package/install/ads_example_package/share/ament_index/resource_index/packages/ads_example_package
+/home/admin/Projects/ros2-examples-ads/ads_example_package/install/ads_example_package/share/ads_example_package/cmake/ads_example_packageConfig.cmake
+/home/admin/Projects/ros2-examples-ads/ads_example_package/install/ads_example_package/share/ads_example_package/cmake/ads_example_packageConfig-version.cmake
+/home/admin/Projects/ros2-examples-ads/ads_example_package/install/ads_example_package/share/ads_example_package/package.xml

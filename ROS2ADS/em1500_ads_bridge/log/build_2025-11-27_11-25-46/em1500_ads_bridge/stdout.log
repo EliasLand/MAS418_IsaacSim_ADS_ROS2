@@ -1,0 +1,19 @@
+[35m[1mConsolidate compiler generated dependencies of target em1500_node[0m
+[ 50%] [32mBuilding CXX object CMakeFiles/em1500_node.dir/src/em1500_ads_node.cpp.o[0m
+[100%] [32m[1mLinking CXX executable em1500_node[0m
+[100%] Built target em1500_node
+-- Install configuration: ""
+-- Up-to-date: /home/admin/Projects/ros2-ads/em1500_ads_bridge/install/em1500_ads_bridge/lib/em1500_ads_bridge/em1500_node
+-- Up-to-date: /home/admin/Projects/ros2-ads/em1500_ads_bridge/install/em1500_ads_bridge/share/ament_index/resource_index/package_run_dependencies/em1500_ads_bridge
+-- Up-to-date: /home/admin/Projects/ros2-ads/em1500_ads_bridge/install/em1500_ads_bridge/share/ament_index/resource_index/parent_prefix_path/em1500_ads_bridge
+-- Up-to-date: /home/admin/Projects/ros2-ads/em1500_ads_bridge/install/em1500_ads_bridge/share/em1500_ads_bridge/environment/ament_prefix_path.dsv
+-- Up-to-date: /home/admin/Projects/ros2-ads/em1500_ads_bridge/install/em1500_ads_bridge/share/em1500_ads_bridge/environment/path.dsv
+-- Up-to-date: /home/admin/Projects/ros2-ads/em1500_ads_bridge/install/em1500_ads_bridge/share/em1500_ads_bridge/local_setup.bash
+-- Up-to-date: /home/admin/Projects/ros2-ads/em1500_ads_bridge/install/em1500_ads_bridge/share/em1500_ads_bridge/local_setup.sh
+-- Up-to-date: /home/admin/Projects/ros2-ads/em1500_ads_bridge/install/em1500_ads_bridge/share/em1500_ads_bridge/local_setup.zsh
+-- Up-to-date: /home/admin/Projects/ros2-ads/em1500_ads_bridge/install/em1500_ads_bridge/share/em1500_ads_bridge/local_setup.dsv
+-- Installing: /home/admin/Projects/ros2-ads/em1500_ads_bridge/install/em1500_ads_bridge/share/em1500_ads_bridge/package.dsv
+-- Up-to-date: /home/admin/Projects/ros2-ads/em1500_ads_bridge/install/em1500_ads_bridge/share/ament_index/resource_index/packages/em1500_ads_bridge
+-- Up-to-date: /home/admin/Projects/ros2-ads/em1500_ads_bridge/install/em1500_ads_bridge/share/em1500_ads_bridge/cmake/em1500_ads_bridgeConfig.cmake
+-- Up-to-date: /home/admin/Projects/ros2-ads/em1500_ads_bridge/install/em1500_ads_bridge/share/em1500_ads_bridge/cmake/em1500_ads_bridgeConfig-version.cmake
+-- Up-to-date: /home/admin/Projects/ros2-ads/em1500_ads_bridge/install/em1500_ads_bridge/share/em1500_ads_bridge/package.xml

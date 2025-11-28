@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/example.bin.dir/example.cpp.o -o example.bin  -Wl,-rpath,/home/admin/Documents/GitHub/PRA400-UiA-Moition-Lab-Digital-Twin/ROS2ADS/build/ads/AdsLib ../AdsLib/libads.so 

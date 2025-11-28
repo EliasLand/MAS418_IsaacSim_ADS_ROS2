@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/AdsLibTest.bin.dir/main.cpp.o -o AdsLibTest.bin  -Wl,-rpath,/home/admin/Documents/GitHub/PRA400-UiA-Moition-Lab-Digital-Twin/ROS2ADS/build/ads/AdsLib ../AdsLib/libads.so 

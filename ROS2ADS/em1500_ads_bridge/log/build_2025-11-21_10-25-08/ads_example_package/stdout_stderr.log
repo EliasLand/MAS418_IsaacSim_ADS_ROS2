@@ -1,0 +1,9 @@
+[31mCMake Error at CMakeLists.txt:8:
+  Parse error.  Expected "(", got newline with text "
+
+  ".
+
+[0m
+-- Configuring incomplete, errors occurred!
+See also "/home/admin/Projects/ros2-examples-ads/ads_example_package/build/ads_example_package/CMakeFiles/CMakeOutput.log".
+gmake: *** [Makefile:267: cmake_check_build_system] Error 1

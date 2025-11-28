@@ -1,0 +1,2 @@
+Invoking command in '/home/admin/Documents/GitHub/PRA400-UiA-Moition-Lab-Digital-Twin/ROS2ADS/build/ads': /usr/bin/cmake --build /home/admin/Documents/GitHub/PRA400-UiA-Moition-Lab-Digital-Twin/ROS2ADS/build/ads -- -j8 -l8
+Invoked command in '/home/admin/Documents/GitHub/PRA400-UiA-Moition-Lab-Digital-Twin/ROS2ADS/build/ads' returned '0': /usr/bin/cmake --build /home/admin/Documents/GitHub/PRA400-UiA-Moition-Lab-Digital-Twin/ROS2ADS/build/ads -- -j8 -l8

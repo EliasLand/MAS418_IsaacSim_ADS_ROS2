@@ -1,0 +1,10 @@
+[01m[K/home/admin/Documents/GitHub/PRA400-UiA-Moition-Lab-Digital-Twin/ROS2ADS/em1500_ads_bridge/src/em1500_ads_node.cpp:[m[K In function ‘[01m[Kint main(int, char**)[m[K’:
+[01m[K/home/admin/Documents/GitHub/PRA400-UiA-Moition-Lab-Digital-Twin/ROS2ADS/em1500_ads_bridge/src/em1500_ads_node.cpp:151:9:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K,[m[K’ or ‘[01m[K;[m[K’ before ‘[01m[Kdouble[m[K’
+  151 |         [01;31m[Kdouble[m[K roll  = p.roll;
+      |         [01;31m[K^~~~~~[m[K
+[01m[K/home/admin/Documents/GitHub/PRA400-UiA-Moition-Lab-Digital-Twin/ROS2ADS/em1500_ads_bridge/src/em1500_ads_node.cpp:156:44:[m[K [01;31m[Kerror: [m[K‘[01m[Kroll[m[K’ was not declared in this scope
+  156 |         ComputeLengths(surge, sway, heave, [01;31m[Kroll[m[K, pitch, yaw, L);
+      |                                            [01;31m[K^~~~[m[K
+gmake[2]: *** [CMakeFiles/em1500_node.dir/build.make:76: CMakeFiles/em1500_node.dir/src/em1500_ads_node.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:137: CMakeFiles/em1500_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

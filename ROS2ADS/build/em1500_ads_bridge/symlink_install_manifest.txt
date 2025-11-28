@@ -1,0 +1,16 @@
+/home/admin/Documents/GitHub/PRA400-UiA-Moition-Lab-Digital-Twin/ROS2ADS/install/em1500_ads_bridge/lib/em1500_ads_bridge/em1500_node
+/home/admin/Documents/GitHub/PRA400-UiA-Moition-Lab-Digital-Twin/ROS2ADS/install/em1500_ads_bridge/share/ament_index/resource_index/package_run_dependencies/em1500_ads_bridge
+/home/admin/Documents/GitHub/PRA400-UiA-Moition-Lab-Digital-Twin/ROS2ADS/install/em1500_ads_bridge/share/ament_index/resource_index/parent_prefix_path/em1500_ads_bridge
+/home/admin/Documents/GitHub/PRA400-UiA-Moition-Lab-Digital-Twin/ROS2ADS/install/em1500_ads_bridge/share/em1500_ads_bridge/environment/ament_prefix_path.sh
+/home/admin/Documents/GitHub/PRA400-UiA-Moition-Lab-Digital-Twin/ROS2ADS/install/em1500_ads_bridge/share/em1500_ads_bridge/environment/ament_prefix_path.dsv
+/home/admin/Documents/GitHub/PRA400-UiA-Moition-Lab-Digital-Twin/ROS2ADS/install/em1500_ads_bridge/share/em1500_ads_bridge/environment/path.sh
+/home/admin/Documents/GitHub/PRA400-UiA-Moition-Lab-Digital-Twin/ROS2ADS/install/em1500_ads_bridge/share/em1500_ads_bridge/environment/path.dsv
+/home/admin/Documents/GitHub/PRA400-UiA-Moition-Lab-Digital-Twin/ROS2ADS/install/em1500_ads_bridge/share/em1500_ads_bridge/local_setup.bash
+/home/admin/Documents/GitHub/PRA400-UiA-Moition-Lab-Digital-Twin/ROS2ADS/install/em1500_ads_bridge/share/em1500_ads_bridge/local_setup.sh
+/home/admin/Documents/GitHub/PRA400-UiA-Moition-Lab-Digital-Twin/ROS2ADS/install/em1500_ads_bridge/share/em1500_ads_bridge/local_setup.zsh
+/home/admin/Documents/GitHub/PRA400-UiA-Moition-Lab-Digital-Twin/ROS2ADS/install/em1500_ads_bridge/share/em1500_ads_bridge/local_setup.dsv
+/home/admin/Documents/GitHub/PRA400-UiA-Moition-Lab-Digital-Twin/ROS2ADS/install/em1500_ads_bridge/share/em1500_ads_bridge/package.dsv
+/home/admin/Documents/GitHub/PRA400-UiA-Moition-Lab-Digital-Twin/ROS2ADS/install/em1500_ads_bridge/share/ament_index/resource_index/packages/em1500_ads_bridge
+/home/admin/Documents/GitHub/PRA400-UiA-Moition-Lab-Digital-Twin/ROS2ADS/install/em1500_ads_bridge/share/em1500_ads_bridge/cmake/em1500_ads_bridgeConfig.cmake
+/home/admin/Documents/GitHub/PRA400-UiA-Moition-Lab-Digital-Twin/ROS2ADS/install/em1500_ads_bridge/share/em1500_ads_bridge/cmake/em1500_ads_bridgeConfig-version.cmake
+/home/admin/Documents/GitHub/PRA400-UiA-Moition-Lab-Digital-Twin/ROS2ADS/install/em1500_ads_bridge/share/em1500_ads_bridge/package.xml
