@@ -22,10 +22,6 @@ The project was developed by:
 * **Elias Landro**
 * **Marcus Axelsen Wold**
 * **Ole-Morten Nyheim**
-
-.. contents::
-   :depth: 2
-   :local:
    
 Introduction
 ------------

@@ -51,6 +51,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#inverse-kinematics">Inverse Kinematics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#heave-offset-correction">Heave Offset Correction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#coordinate-frame-alignment">Coordinate Frame Alignment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#coordinate-frame-corrections">Coordinate Frame Corrections</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#dynamic-reference-l-ref">Dynamic Reference (L_ref)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#publisher-interface">Publisher Interface</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#main-loop-structure">Main Loop Structure</a></li>
@@ -173,7 +174,9 @@ the required correction was found to be:</p>
 <p>To achieve correct motion in Isaac Sim, the PLC pose must be transformed into
 the coordinate frame expected by the UiA EM1500 inverse kinematics. The PLC
 uses a different axis convention and reports rotations in radians.</p>
-<p>### Coordinate Frame Corrections</p>
+</section>
+<section id="coordinate-frame-corrections">
+<h2>Coordinate Frame Corrections<a class="headerlink" href="#coordinate-frame-corrections" title="Link to this heading"></a></h2>
 <p>The following transformations are applied to convert the PLC pose into the
 IK frame:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">surge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="p">.</span><span class="n">surge</span><span class="p">;</span>
