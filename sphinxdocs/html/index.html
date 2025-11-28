@@ -1,0 +1,202 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EM1500 ADS Bridge documentation &mdash; EM1500 ADS Bridge 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="PLC Interface" href="plc_interface.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            EM1500 ADS Bridge
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="plc_interface.html">PLC Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ros2_ads_bridge.html">ROS2–ADS Bridge</a></li>
+<li class="toctree-l1"><a class="reference internal" href="isaac_integration.html">Isaac Sim Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running_the_system.html">Running the System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demos.html">Demos</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">EM1500 ADS Bridge</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">EM1500 ADS Bridge documentation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="em1500-ads-bridge-documentation">
+<h1>EM1500 ADS Bridge documentation<a class="headerlink" href="#em1500-ads-bridge-documentation" title="Link to this heading"></a></h1>
+<p>This is the documentation for the <strong>EM1500 ADS-ROS2_Isaac Sim Bridge</strong>. This project connects a physical stewart platform (EM1500) to a digital twin in NVIDIA Isaac Sim using:</p>
+<ul class="simple">
+<li><p><strong>TwinCAT 3 (Beckhoff PLC)</strong></p></li>
+<li><p><strong>ADS communication in C++</strong></p></li>
+<li><p><strong>ROS2 (Humble)</strong></p></li>
+<li><p><strong>Isaac Sim Action Graph</strong></p></li>
+<li><p><strong>Isaac Sim ROS2 Bridge</strong></p></li>
+<li><p><strong>Inverse Kinematics in C++ using Eigen</strong></p></li>
+</ul>
+<p>This documentation describes what we built, how it works, and how future students can reproduce and extend the system.</p>
+<p>The project was developed by:</p>
+<ul class="simple">
+<li><p><strong>Elias Landro</strong></p></li>
+<li><p><strong>Marcus Axelsen Wold</strong></p></li>
+<li><p><strong>Ole-Morten Nyheim</strong></p></li>
+</ul>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>The goal of this project is to stream the real-time motion of the EM1500 Stewart platform from a Beckhoff PLC into a virtual model inside NVIDIA Isaac Sim.</p>
+<p>The system consists of four major components:</p>
+<ol class="arabic simple">
+<li><p><strong>PLC Pose Output (TwinCAT 3)</strong>
+A structured variable <code class="docutils literal notranslate"><span class="pre">stEM1500Pose</span></code> stores surge, sway, heave, roll, pitch, yaw as <cite>LREAL</cite>, updated every PLC cycle.</p></li>
+<li><p><strong>ROS2 ADS Bridge (C++ node)</strong>
+A custom C++ node reads the structured pose through ADS, performs Stewart-platform inverse kinematics, and publishes the 6 computed leg lengths on:
+<code class="docutils literal notranslate"><span class="pre">/stewart/legs_em1500</span></code></p></li>
+<li><p><strong>Isaac Sim ROS2 Subscriber + Action Graph</strong>
+Isaac Sim reads the ROS2 topic and applies the leg lengths to six prismatic joint drives.</p></li>
+<li><p><strong>Digital Twin</strong>
+A realistic Stewart platform with proper joints, limits, orientation, and physics constraints.</p></li>
+</ol>
+<p>This documentation will cover:</p>
+<ul class="simple">
+<li><p>PLC ADS pose interface</p></li>
+<li><p>ROS2 C++ node architecture</p></li>
+<li><p>Setup of Eigen, ADS library, CMake, package.xml</p></li>
+<li><p>Stewart platform inverse kinematics</p></li>
+<li><p>Isaac Sim configuration (Action Graph and joint mapping)</p></li>
+<li><p>Calibration and sign conventions</p></li>
+<li><p>Publishing rates and sync</p></li>
+<li><p>Known issues and troubleshooting</p></li>
+<li><p>Demonstration videos/GIFs</p></li>
+</ul>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="plc_interface.html">PLC Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="plc_interface.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plc_interface.html#pose-data-type">Pose Data Type</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plc_interface.html#main-program-and-ethercat-bridge">Main Program and EtherCAT Bridge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plc_interface.html#system-architecture">System Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plc_interface.html#task-and-cycle-time">Task and Cycle Time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plc_interface.html#ethercat-timeout-monitoring">EtherCAT Timeout Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plc_interface.html#mapping-ethercat-feedback-to-pose">Mapping EtherCAT Feedback to Pose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plc_interface.html#example-legacy-test-code">Example: Legacy Test Code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ros2_ads_bridge.html">ROS2–ADS Bridge</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ros2_ads_bridge.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ros2_ads_bridge.html#ads-communication">ADS Communication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ros2_ads_bridge.html#inverse-kinematics">Inverse Kinematics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ros2_ads_bridge.html#heave-offset-correction">Heave Offset Correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ros2_ads_bridge.html#coordinate-frame-alignment">Coordinate Frame Alignment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ros2_ads_bridge.html#coordinate-frame-corrections">Coordinate Frame Corrections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ros2_ads_bridge.html#dynamic-reference-l-ref">Dynamic Reference (L_ref)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ros2_ads_bridge.html#publisher-interface">Publisher Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ros2_ads_bridge.html#main-loop-structure">Main Loop Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ros2_ads_bridge.html#building-and-running-the-node">Building and Running the Node</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="isaac_integration.html">Isaac Sim Integration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="isaac_integration.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isaac_integration.html#importing-the-stewart-platform">Importing the Stewart Platform</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isaac_integration.html#action-graph-integration">Action Graph Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="isaac_integration.html#leg-index-mapping-in-isaac-sim">Leg Index Mapping in Isaac Sim</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="running_the_system.html">Running the System</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="running_the_system.html#system-components">System Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running_the_system.html#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="demos.html">Demos</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="demos.html#surge-motion-0-2-m-0-05-hz">Surge Motion: 0.2 m, 0.05 Hz</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demos.html#roll-motion-10-0-05-hz">Roll Motion: 10°, 0.05 Hz</a></li>
+<li class="toctree-l2"><a class="reference internal" href="demos.html#motion-lab-wave-simulation-0-4-m-0-05-hz">Motion Lab Wave Simulation: 0.4 m, 0.05 Hz</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="plc_interface.html" class="btn btn-neutral float-right" title="PLC Interface" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Elias Landro, Marcus Axelsen Wold and Ole-Morten Nyheim.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

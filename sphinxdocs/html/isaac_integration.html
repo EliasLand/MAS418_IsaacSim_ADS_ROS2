@@ -1,0 +1,293 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Isaac Sim Integration &mdash; EM1500 ADS Bridge 1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=f2a433a1"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Running the System" href="running_the_system.html" />
+    <link rel="prev" title="ROS2–ADS Bridge" href="ros2_ads_bridge.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            EM1500 ADS Bridge
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="plc_interface.html">PLC Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ros2_ads_bridge.html">ROS2–ADS Bridge</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Isaac Sim Integration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#importing-the-stewart-platform">Importing the Stewart Platform</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#importing-directly-from-onshape">Importing Directly from Onshape</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adding-prismatic-drives-to-the-actuator-joints">Adding Prismatic Drives to the Actuator Joints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adding-the-stewart-platform-to-the-lab-environment">Adding the Stewart Platform to the Lab Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fixing-the-platform-base">Fixing the Platform Base</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#action-graph-integration">Action Graph Integration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ros2-subscriber-node">ROS2 Subscriber Node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#splitting-the-float64multiarray-into-six-values">Splitting the Float64MultiArray Into Six Values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#writing-values-to-prismatic-joint-drives">Writing Values to Prismatic Joint Drives</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#leg-index-mapping-in-isaac-sim">Leg Index Mapping in Isaac Sim</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#correct-mapping">Correct Mapping</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="running_the_system.html">Running the System</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demos.html">Demos</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">EM1500 ADS Bridge</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Isaac Sim Integration</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/isaac_integration.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="isaac-sim-integration">
+<h1>Isaac Sim Integration<a class="headerlink" href="#isaac-sim-integration" title="Link to this heading"></a></h1>
+<p>This chapter explains how the ROS2 ADS bridge connects to NVIDIA Isaac Sim and drives the virtual EM1500 Stewart platform in real time. The goal is for Isaac Sim to mirror the motion of the physical platform by applying the leg-length commands published by the ROS2 node.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>Isaac Sim is used to visualize and validate Stewart platform motion. The ROS2 node publishes a <code class="docutils literal notranslate"><span class="pre">Float64MultiArray</span></code> containing six leg lengths on:</p>
+<p><code class="docutils literal notranslate"><span class="pre">stewart/legs_em1500</span></code></p>
+<p>Inside Isaac Sim, an Action Graph subscribes to this topic, extracts the array, and writes each value to the corresponding prismatic drive of each leg.</p>
+</section>
+<section id="importing-the-stewart-platform">
+<h2>Importing the Stewart Platform<a class="headerlink" href="#importing-the-stewart-platform" title="Link to this heading"></a></h2>
+<p>The Stewart platform model is created in Onshape and imported into Isaac Sim using the <em>Onshape for Isaac Sim</em> extension. This extension converts an entire Onshape assembly into a USD scene.</p>
+<section id="importing-directly-from-onshape">
+<h3>Importing Directly from Onshape<a class="headerlink" href="#importing-directly-from-onshape" title="Link to this heading"></a></h3>
+<ol class="arabic">
+<li><p>Open the <strong>Extension Manager</strong> in Isaac Sim.</p></li>
+<li><p>Enable the extension:</p>
+<p><code class="docutils literal notranslate"><span class="pre">omni.isaac.onshape</span></code></p>
+</li>
+<li><p>A new menu appears:</p>
+<p><strong>File → Import from Onshape</strong></p>
+</li>
+<li><p>Log into your Onshape account.</p></li>
+<li><p>Select the Stewart platform assembly.</p></li>
+<li><p>Click <strong>Import</strong>.</p></li>
+</ol>
+<p>The importer assigns generic names (e.g., <code class="docutils literal notranslate"><span class="pre">imported_1</span></code>). To maintain clarity, all model parts were manually renamed to meaningful identifiers and organized into folders within the Stage tree. This greatly improves readability and makes editing the USD easier.</p>
+</section>
+<section id="adding-prismatic-drives-to-the-actuator-joints">
+<h3>Adding Prismatic Drives to the Actuator Joints<a class="headerlink" href="#adding-prismatic-drives-to-the-actuator-joints" title="Link to this heading"></a></h3>
+<p>The imported Onshape model does <em>not</em> include actuator drives, so each prismatic joint (e.g., <code class="docutils literal notranslate"><span class="pre">Rod1Prismatic</span></code>) must be manually configured.</p>
+<p>Under <code class="docutils literal notranslate"><span class="pre">Physics</span> <span class="pre">→</span> <span class="pre">Drive</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Drive</span> <span class="n">Type</span><span class="p">:</span> <span class="n">Linear</span>
+<span class="n">stiffness</span> <span class="o">=</span> <span class="mi">2_000_000</span>      <span class="c1"># N/m</span>
+<span class="n">damping</span>   <span class="o">=</span> <span class="mi">50_000</span>         <span class="c1"># N·s/m</span>
+<span class="n">maxForce</span>  <span class="o">=</span> <span class="mi">500_000</span>        <span class="c1"># N</span>
+</pre></div>
+</div>
+<p>These values provide strong, stable actuation of each cylinder.</p>
+</section>
+<section id="adding-the-stewart-platform-to-the-lab-environment">
+<h3>Adding the Stewart Platform to the Lab Environment<a class="headerlink" href="#adding-the-stewart-platform-to-the-lab-environment" title="Link to this heading"></a></h3>
+<p>To insert the Stewart platform into the main simulation file:</p>
+<ol class="arabic">
+<li><p>Open <code class="docutils literal notranslate"><span class="pre">UiAMotionLab.usd</span></code>.</p></li>
+<li><p>Right-click in the Stage tree → <strong>Add → Reference</strong>.</p></li>
+<li><p>Select <code class="docutils literal notranslate"><span class="pre">SmallStewart.usd</span></code>.</p></li>
+<li><p>The platform appears at:</p>
+<p><code class="docutils literal notranslate"><span class="pre">/World/SmallStewart</span></code></p>
+</li>
+</ol>
+<p>Referencing the platform ensures updates propagate automatically if the Onshape model is re-imported later.</p>
+</section>
+<section id="fixing-the-platform-base">
+<h3>Fixing the Platform Base<a class="headerlink" href="#fixing-the-platform-base" title="Link to this heading"></a></h3>
+<p>After import, the platform is not anchored and will fall under gravity. To fix it, a <strong>Fixed Joint</strong> was added between the world and the lower base plate.</p>
+<p>Joint connection:</p>
+<p><code class="docutils literal notranslate"><span class="pre">/World</span></code> → <code class="docutils literal notranslate"><span class="pre">/World/SmallStewart/BaseFrame</span></code></p>
+<p>This constrains the base completely and ensures only the prismatic legs control platform motion.</p>
+</section>
+</section>
+<section id="action-graph-integration">
+<h2>Action Graph Integration<a class="headerlink" href="#action-graph-integration" title="Link to this heading"></a></h2>
+<p>The last step is connecting ROS2 commands to the prismatic joint drives. This is handled entirely via an <strong>Action Graph</strong>, which performs:</p>
+<ol class="arabic simple">
+<li><p>Subscribing to the ROS2 leg-length topic</p></li>
+<li><p>Extracting six scalar values from the Float64MultiArray</p></li>
+<li><p>Writing each value to the matching prismatic joint drive</p></li>
+</ol>
+<section id="ros2-subscriber-node">
+<h3>ROS2 Subscriber Node<a class="headerlink" href="#ros2-subscriber-node" title="Link to this heading"></a></h3>
+<p>The graph includes a <em>ROS2 Subscriber</em> node:</p>
+<p>Type: <code class="docutils literal notranslate"><span class="pre">std_msgs/msg/Float64MultiArray</span></code></p>
+<p>Configuration:</p>
+<ul class="simple">
+<li><p><strong>Topic Name:</strong> <code class="docutils literal notranslate"><span class="pre">stewart/legs_em1500</span></code></p></li>
+<li><p><strong>Domain ID:</strong> <code class="docutils literal notranslate"><span class="pre">0</span></code> (default)</p></li>
+<li><p><strong>QoS:</strong> default</p></li>
+</ul>
+<p>The node outputs the leg-length array on its <code class="docutils literal notranslate"><span class="pre">data</span></code> pin.</p>
+</section>
+<section id="splitting-the-float64multiarray-into-six-values">
+<h3>Splitting the Float64MultiArray Into Six Values<a class="headerlink" href="#splitting-the-float64multiarray-into-six-values" title="Link to this heading"></a></h3>
+<p>Six <strong>Array Index</strong> nodes are used to extract individual values:</p>
+<ul class="simple">
+<li><p>Index <code class="docutils literal notranslate"><span class="pre">0</span></code> → Leg 1</p></li>
+<li><p>Index <code class="docutils literal notranslate"><span class="pre">1</span></code> → Leg 2</p></li>
+<li><p>Index <code class="docutils literal notranslate"><span class="pre">2</span></code> → Leg 3</p></li>
+<li><p>Index <code class="docutils literal notranslate"><span class="pre">3</span></code> → Leg 4</p></li>
+<li><p>Index <code class="docutils literal notranslate"><span class="pre">4</span></code> → Leg 5</p></li>
+<li><p>Index <code class="docutils literal notranslate"><span class="pre">5</span></code> → Leg 6</p></li>
+</ul>
+<p>Each output is a scalar representing the target stroke length.</p>
+<p>Because <code class="docutils literal notranslate"><span class="pre">WritePrimAttribute</span></code> expects arrays, each scalar is wrapped using a <strong>Make Array</strong> node.</p>
+</section>
+<section id="writing-values-to-prismatic-joint-drives">
+<h3>Writing Values to Prismatic Joint Drives<a class="headerlink" href="#writing-values-to-prismatic-joint-drives" title="Link to this heading"></a></h3>
+<p>Each leg actuator has a corresponding <strong>Write Prim Attribute</strong> node.</p>
+<p>Example for Leg 1:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">World</span><span class="o">/</span><span class="n">SmallStewart</span><span class="o">/</span><span class="n">Joints</span><span class="o">/</span><span class="n">Leg1</span><span class="o">/</span><span class="n">Rod1Prismatic</span><span class="o">.</span><span class="n">drive</span><span class="p">:</span><span class="n">linear</span><span class="p">:</span><span class="n">physics</span><span class="p">:</span><span class="n">targetPosition</span>
+</pre></div>
+</div>
+<p>Configuration of each WritePrimAttribute node:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">prims</span></code>: RodXPrismatic joint</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">attribute</span></code>: <code class="docutils literal notranslate"><span class="pre">drive:linear:physics:targetPosition</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">values</span></code>: from MakeArray node</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">attributeType</span></code>: left empty for auto-detection</p></li>
+</ul>
+<p>All six WritePrimAttribute nodes update each frame, allowing Isaac Sim to follow the real Stewart platform in real time.</p>
+</section>
+</section>
+<section id="leg-index-mapping-in-isaac-sim">
+<h2>Leg Index Mapping in Isaac Sim<a class="headerlink" href="#leg-index-mapping-in-isaac-sim" title="Link to this heading"></a></h2>
+<p>The Stewart platform model in Isaac Sim does not use the same leg numbering
+convention as the UiA EM1500 inverse kinematics model. The IK assumes that:</p>
+<ul class="simple">
+<li><p>Leg indices increase <strong>clockwise</strong></p></li>
+<li><p>Leg 1 starts at the <strong>front-right actuator</strong></p></li>
+</ul>
+<p>However, the USD model inside Isaac Sim numbers its prismatic joints
+<strong>anti-clockwise</strong>, starting from the same physical location.</p>
+<p>This mismatch caused incorrect behavior such as:
+- Pure surge producing an unwanted rotation
+- Roll/pitch causing lateral translation
+- Motions appearing mirrored or inconsistent</p>
+<p>To correct this, the IK output must be reordered before sending leg commands
+to Isaac Sim.</p>
+<section id="correct-mapping">
+<h3>Correct Mapping<a class="headerlink" href="#correct-mapping" title="Link to this heading"></a></h3>
+<p>The following mapping aligns the IK legs with the Isaac Sim joint order:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>IK leg index</strong></p></th>
+<th class="head"><p><strong>Isaac Sim joint</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>6</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>5</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>4</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>3</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>2</p></td>
+</tr>
+</tbody>
+</table>
+<p>This re-indexing ensures that each leg length computed by the inverse
+kinematics is applied to the correct prismatic joint in Isaac Sim.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ros2_ads_bridge.html" class="btn btn-neutral float-left" title="ROS2–ADS Bridge" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="running_the_system.html" class="btn btn-neutral float-right" title="Running the System" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Elias Landro, Marcus Axelsen Wold and Ole-Morten Nyheim.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
