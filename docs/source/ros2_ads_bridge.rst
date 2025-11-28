@@ -107,7 +107,8 @@ To achieve correct motion in Isaac Sim, the PLC pose must be transformed into
 the coordinate frame expected by the UiA EM1500 inverse kinematics. The PLC
 uses a different axis convention and reports rotations in radians.
 
-### Coordinate Frame Corrections
+Coordinate Frame Corrections
+----------------------------
 
 The following transformations are applied to convert the PLC pose into the
 IK frame:
